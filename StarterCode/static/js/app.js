@@ -6,7 +6,7 @@ Feel free to disregard and create your own code */
 function buildMetadata(sample) {
 
     // Read the json data
-    d3.json("samples.json").then((data)=> {
+    d3.json("\samples.json").then((data)=> {
         // Parse and filter the data to get the sample's metadata
         var metadata = data.metadata;
         console.log(metadata);
@@ -28,7 +28,7 @@ function buildMetadata(sample) {
 function buildCharts(sample) {
 
     // Read the json data
-    d3.json("samples.json").then (sampledata =>{
+    d3.json("\samples.json").then (sampledata =>{
         console.log(sampledata)
         var ids = sampledata.samples[0].otu_ids;
         console.log(ids)
@@ -106,11 +106,12 @@ function buildCharts(sample) {
 function init() {
 
     // Read json data
-    d3.json("samples.json").then((data)=> {
+    d3.json("\samples.json").then((data)=> {
         console.log(data)
 
         // Parse and filter data to get sample names
-       // Add dropdown option for each sample
+        // Add dropdown option for each sample
+        var dropdown = d3.select("#selDataset");
         data.names.forEach(function(name) {
             dropdown.append("option").text(name).property("value");
         });
