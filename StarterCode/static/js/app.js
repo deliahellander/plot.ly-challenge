@@ -10,8 +10,11 @@ function buildMetadata(sample) {
         // Parse and filter the data to get the sample's metadata
         // errors in this code, 
         var metadata = data.metadata;
+
         console.log(metadata);
-        var results = metadata.filter(metadata => metadata.id.toString() == id)[0];
+
+        // filter data by id
+        var results = metadata.filter(metadata => metadata.id.toString() === id)[0];
 
         // Specify the location of the metadata and update it
         var demographicInfo = d3.select("#sample-metadata");
@@ -39,6 +42,8 @@ function buildCharts(sample) {
         console.log (labels)
 
         // Parse and filter the data to get the sample's OTU data
+        // filter data by id
+        //var results = metadata.filter(metadata => metadata.id.toString() === id)[0];
         // Pay attention to what data is required for each chart
 
     //Bar Chart
@@ -71,9 +76,9 @@ function buildCharts(sample) {
             }
         };
 
-
         // Create bar chart in correct location
         Plotly.newPlot("bar", data, layout);
+
     // Bubble Chart
         var trace2 = {
             x: sampledata.samples[0].otu_ids,
@@ -103,16 +108,18 @@ function buildCharts(sample) {
     
 }
 
+
 // Define function that will run on page load
 function init() {
+
+    // Add dropdown option for each sample
+    var dropdown = d3.select("#selDataset");
 
     // Read json data
     d3.json("\samples.json").then((data)=> {
         console.log(data)
 
         // Parse and filter data to get sample names
-        // Add dropdown option for each sample
-        var dropdown = d3.select("#selDataset");
         data.names.forEach(function(name) {
             dropdown.append("option").text(name).property("value");
         });
@@ -124,7 +131,7 @@ function init() {
 
 }
 
-function optionChanged(sample){
+function optionChanged(sample) {
     buildCharts(sample);
     buildMetadata(sample);
 }
