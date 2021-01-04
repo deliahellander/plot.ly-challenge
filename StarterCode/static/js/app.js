@@ -8,16 +8,17 @@ function buildMetadata(sample) {
     // Read the json data
     d3.json("\samples.json").then((data)=> {
         // Parse and filter the data to get the sample's metadata
+        // errors in this code, 
         var metadata = data.metadata;
         console.log(metadata);
-        var result = metadata.filter(meta => meta.id.toString() === id)[0];
+        var results = metadata.filter(metadata => metadata.id.toString() == id)[0];
 
         // Specify the location of the metadata and update it
         var demographicInfo = d3.select("#sample-metadata");
         //empty previous inputs
         demographicInfo.html("");
         //append info into the panel
-        Object.entries(result).forEach((key) => {   
+        Object.entries(results).forEach((key) => {   
             demographicInfo.append("h5").text(key[0].toUpperCase() + ": " + key[1] + "\n");    
         });
     });
@@ -123,7 +124,7 @@ function init() {
 
 }
 
-function optionChanged(newSample){
+function optionChanged(sample){
     buildCharts(sample);
     buildMetadata(sample);
 }
