@@ -33,6 +33,8 @@ function buildCharts(sample) {
 
     // Read the json data
     d3.json("\samples.json").then (sampledata =>{
+        // filter data by id
+        //var results = metadata.filter(metadata => metadata.id.toString() === id)[0];
         console.log(sampledata)
         var ids = sampledata.samples[0].otu_ids;
         console.log(ids)
@@ -42,8 +44,7 @@ function buildCharts(sample) {
         console.log (labels)
 
         // Parse and filter the data to get the sample's OTU data
-        // filter data by id
-        //var results = metadata.filter(metadata => metadata.id.toString() === id)[0];
+        
         // Pay attention to what data is required for each chart
 
     //Bar Chart
