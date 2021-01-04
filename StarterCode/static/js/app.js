@@ -3,7 +3,7 @@ This is not the only way to complete this assignment.
 Feel free to disregard and create your own code */
 
 // git statusDefine a function that will create metadata for given sample
-function buildMetadata(sample) {
+function buildMetadata(id) {
 
     // Read the json data
     d3.json("\samples.json").then((data)=> {
@@ -29,32 +29,37 @@ function buildMetadata(sample) {
 }
 
 // Define a function that will create charts for given sample
-function buildCharts(sample) {
+function buildCharts(id) {
 
     // Read the json data
-    d3.json("\samples.json").then (sampledata =>{
+    d3.json("\samples.json").then ((data) =>{
+        console.log(data)
         // filter data by id
-        //var results = metadata.filter(metadata => metadata.id.toString() === id)[0];
-        console.log(sampledata)
-        var ids = sampledata.samples[0].otu_ids;
-        console.log(ids)
-        var sampleValues =  sampledata.samples[0].sample_values.slice(0,10).reverse();
-        console.log(sampleValues)
-        var labels =  sampledata.samples[0].otu_labels.slice(0,10);
-        console.log (labels)
-
-        // Parse and filter the data to get the sample's OTU data
+        var result = data.samples.filter(s => s.id.toString() === id)[0];
         
-        // Pay attention to what data is required for each chart
+        //retrieving top 10 ids
+        var ids = result.otu_ids.slice(0, 10).reverse();;
+        console.log(ids)
+
+        //retrieving top 10 sample values
+        var sampleValues = result.sample_values.slice(0,10).reverse();
+        console.log(sampleValues)
+
+        //retrieving top 10 otu lables
+        var labels = result.otu_labels.slice(0,10);
+        console.log(labels)
+
 
     //Bar Chart
         //  display the top 10 OTUs found in that individual ID. 
-        var top_OTU = (sampledata.samples[0].otu_ids.slice(0, 10)).reverse();
+        //var top_OTU = (data.samples[0].otu_ids.slice(0, 10)).reverse();
         // get the otu id's to the desired form for the plot
-        var OTU_id = top_OTU.map(d => "OTU " + d);
-        console.log(`OTU IDS: ${OTU_id}`)
+        var OTU_id = labels.map(d => "OTU " + d);
+        console.log(`OTU IDS: ${ids}`)
+
         // retrieve lables for top 10 OTUs for the plot
         console.log(`OTU_labels: ${labels}`)
+
         var trace = {
             x: sampleValues,
             y: OTU_id,
@@ -82,14 +87,14 @@ function buildCharts(sample) {
 
     // Bubble Chart
         var trace2 = {
-            x: sampledata.samples[0].otu_ids,
-            y: sampledata.samples[0].sample_values,
+            x: result.otu_ids,
+            y: result.sample_values,
             mode: "markers",
             marker: {
-                size: sampledata.samples[0].sample_values,
-                color: sampledata.samples[0].otu_ids
+                size: result.sample_values,
+                color: result.otu_ids
             },
-            text:  sampledata.samples[0].otu_labels
+            text: result.labels
 
         };
 
@@ -132,9 +137,9 @@ function init() {
 
 }
 
-function optionChanged(sample) {
-    buildCharts(sample);
-    buildMetadata(sample);
+function optionChanged(id) {
+    buildCharts(id);
+    buildMetadata(id);
 }
 
 // Initialize dashboard on page load
