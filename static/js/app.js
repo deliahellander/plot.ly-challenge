@@ -1,16 +1,11 @@
-/* The following is an example on how you might structure your code.
-This is not the only way to complete this assignment.
-Feel free to disregard and create your own code */
-
 // git statusDefine a function that will create metadata for given sample
 function buildMetadata(id) {
 
     // Read the json data
     d3.json("\samples.json").then((data)=> {
-        // Parse and filter the data to get the sample's metadata
-        // errors in this code, 
-        var metadata = data.metadata;
 
+        // Parse and filter the data to get the sample's metadata
+        var metadata = data.metadata;
         console.log(metadata);
 
         // filter data by id
@@ -18,8 +13,10 @@ function buildMetadata(id) {
 
         // Specify the location of the metadata and update it
         var demographicInfo = d3.select("#sample-metadata");
+
         //empty previous inputs
         demographicInfo.html("");
+
         //append info into the panel
         Object.entries(results).forEach((key) => {   
             demographicInfo.append("h5").text(key[0].toUpperCase() + ": " + key[1] + "\n");    
@@ -34,6 +31,7 @@ function buildCharts(id) {
     // Read the json data
     d3.json("\samples.json").then ((data) =>{
         console.log(data)
+
         // filter data by id
         var result = data.samples.filter(s => s.id.toString() === id)[0];
         
@@ -52,7 +50,6 @@ function buildCharts(id) {
 
     //Bar Chart
         //  display the top 10 OTUs found in that individual ID. 
-        //var top_OTU = (data.samples[0].otu_ids.slice(0, 10)).reverse();
         // get the otu id's to the desired form for the plot
         var OTU_id = ids.map(d => "OTU " + d);
         console.log(`OTU IDS: ${ids}`)
