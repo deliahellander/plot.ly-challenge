@@ -54,7 +54,7 @@ function buildCharts(id) {
         //  display the top 10 OTUs found in that individual ID. 
         //var top_OTU = (data.samples[0].otu_ids.slice(0, 10)).reverse();
         // get the otu id's to the desired form for the plot
-        var OTU_id = labels.map(d => "OTU " + d);
+        var OTU_id = ids.map(d => "OTU " + d);
         console.log(`OTU IDS: ${ids}`)
 
         // retrieve lables for top 10 OTUs for the plot
@@ -75,7 +75,7 @@ function buildCharts(id) {
         // editing layout of bar chart
         var layout = {
             margin: {
-                l: 75,
+                l: 100,
                 r: 75,
                 t: 75,
                 b: 75
@@ -102,7 +102,7 @@ function buildCharts(id) {
         var layout_2 = {
             xaxis: {title: "OTU ID"},
             height: 500,
-            width: 750
+            width: 1100
         };
 
         // creating data variable 
