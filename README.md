@@ -2,7 +2,7 @@
 
 ## Results
 
-Link to website: ![a link](https://deliahellander.github.io/plot.ly-challenge/)
+Click to go straight to website: [website link](https://deliahellander.github.io/plot.ly-challenge/)
 
  ![website](https://github.com/deliahellander/plot.ly-challenge/blob/main/Images/plot.ly-challenge-image2.png?raw=true)
  ![website](https://github.com/deliahellander/plot.ly-challenge/blob/main/Images/plot.ly-challenge-image1.png?raw=true)
